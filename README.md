@@ -7,7 +7,7 @@
 
 # **A. Setup Instructions**
 
-1. [Make a copy of this sheet]("https://docs.google.com/spreadsheets/d/1CHypFdCeLU8C6dRzbg4fHUUezas_1TPtpveYhnKD8Ns/edit?usp=sharing")
+1. [Make a copy of this sheet](https://docs.google.com/spreadsheets/d/1CHypFdCeLU8C6dRzbg4fHUUezas_1TPtpveYhnKD8Ns/edit?usp=sharing)
 
 2. **Select “Extensions” > “Apps Script”**
 
