@@ -1,0 +1,49 @@
+function enterWinner() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var sheet = ss.getActiveSheet();
+  if ( sheet.getName() == "RESULTS BRACKET" ) {
+
+    if ( ss.getActiveCell().getDataValidation() != null ) {
+      
+      var entriesSheet = ss.getSheetByName("ENTRIES");
+      var range = entriesSheet.getRange(3,2,1,64);
+      var winners = range.getValues();
+      var winner = ss.getActiveCell().getValue();
+
+      var namedRanges = [
+        'R_Round2_1','R_Round2_2','R_Round2_3','R_Round2_4',
+        'R_SweetSixteen1','R_SweetSixteen2','R_SweetSixteen3','R_SweetSixteen4',
+        'R_EliteEight1','R_EliteEight2','R_EliteEight3','R_EliteEight4',
+        'R_FinalFour1','R_FinalFour2','R_Championship','R_Champion','R_Tiebreaker'];
+      var winnersRaw = [];
+      for (var a = 0; a < namedRanges.length; a++) {
+        winnersRaw = winnersRaw.concat(ss.getRangeByName(namedRanges[a]).getValues().flat());
+      }
+      var valuesToKeep = [1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1, // Round2_1
+                          1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1, // Round2_2
+                          1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1, // Round2_3
+                          1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1,0,0,0,0,0,0,1,1, // Round2_4
+                          1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1, // SweetSixteen1
+                          1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1, // SweetSixteen2
+                          1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1, // SweetSixteen3
+                          1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1, // SweetSixteen4
+                          1,1,1,1,1,1,1,1, // EliteEight1, EliteEight2, EliteEight3, EliteEight4, 
+                          1,1,1,1,1,1,1,1]; // FinalFour1, FinalFour2, Championship, Champion, Tiebreaker
+      var count = 0;
+      var b = 0;
+      for (a = 0; a <= valuesToKeep.length; a++) {
+        if ( valuesToKeep[a] > 0 ) {
+          winners[b] = winnersRaw[a];
+          b++;
+        }
+      }
+      //var ui = SpreadsheetApp.getUi();
+      //ui.alert("Values are: " + winners);
+      ss.toast("Updating Winners: " + winner)
+      range.setValues([winners]);
+    }
+  }
+}
+
+// 2023 - Created by Ben Powers
+// ben.powers.creative@gmail.com
