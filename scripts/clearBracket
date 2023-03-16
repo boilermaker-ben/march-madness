@@ -1,0 +1,23 @@
+function clearBracket() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet();
+  var ui = SpreadsheetApp.getUi();
+
+  var fillableSheet = ss.getSheetByName("ENTRY BRACKET");
+  var entriesSheet = ss.getSheetByName("ENTRIES");
+  var namedRanges = [
+    'Name','Round2_1','Round2_2','Round2_3','Round2_4',
+    'SweetSixteen1','SweetSixteen2','SweetSixteen3','SweetSixteen4',
+    'EliteEight1','EliteEight2','EliteEight3','EliteEight4',
+    'FinalFour1','FinalFour2','FinalFour3','FinalFour4','Championship1','Championship2','Champion','Tiebreaker'];
+
+  var erase = ui.alert("If you're running this script standalone from the menu, make sure you've copied your values already.\r\n\r\nClear entry bracket sheet now?",ui.ButtonSet.YES_NO);
+  if (erase == "YES") {
+    for (a = 0; a < namedRanges.length; a++) {
+      ss.getRangeByName(namedRanges[a]).clearContent();
+      Logger.log(namedRanges[a]);
+    }
+  }
+}
+
+// 2023 - Created by Ben Powers
+// ben.powers.creative@gmail.com
